@@ -8,7 +8,12 @@ const resetUser = (state) => {
   state.auth.isLoggedIn = false
 }
 
+const updatePins = (state, pins) => {
+  state.pins.list = pins
+}
+
 export default {
   updateUser,
   resetUser,
+  updatePins,
 }

@@ -11,6 +11,18 @@ const updateUser = ({ commit }) => {
     })
 }
 
+const fetchPins = ({ commit }) => {
+  Vue.http.get('/api/pin/all')
+    .then(({ data }) => {
+      if (data.success) {
+        commit('updatePins', data.pins)
+      } else {
+        // TODO: flash msg
+      }
+    })
+}
+
 export default {
   updateUser,
+  fetchPins,
 }

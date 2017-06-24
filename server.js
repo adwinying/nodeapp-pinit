@@ -25,9 +25,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/pin', pinRoutes)
 
 app.get('/', (req, res) => {
-  res.json({
-    api: 'online',
-  })
+  res.redirect('http://localhost:8000')
 })
 
 app.listen(port, () => {
