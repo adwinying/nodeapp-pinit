@@ -16,12 +16,16 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li><a href="#">About</a></li>
-        <li><a href="#">All Pins</a></li>
-        <li><a href="#">My Pins</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li v-if="!isLoggedIn">
           <a href="/api/auth/login"><i class="fa fa-twitter"></i> Login</a>
+        </li>
+        <li v-if="isLoggedIn">
+          <a href="#">New Pin</a>
+        </li>
+        <li v-if="isLoggedIn">
+          <router-link to="/mypins">My Pins</router-link>
         </li>
         <li v-if="isLoggedIn" class="dropdown" v-bind:class="{ open: isDropdownActive }">
           <a href="#"
@@ -64,12 +68,12 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-li > a.router-link-active
+li > a.router-link-exact-active
   color: #fff !important
   background-color: #006687 !important
 
 .profile-thumb
-  width: 24px
+  width: 21px
   height: auto
   margin-right: 10px
 </style>
