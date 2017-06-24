@@ -24,4 +24,12 @@ authRouter.get('/profile', loggedIn, (req, res) => {
   })
 })
 
+authRouter.get('/logout', loggedIn, (req, res) => {
+  req.logout()
+  res.json({
+    success: true,
+    message: 'Successfully logged out.',
+  })
+})
+
 module.exports = authRouter
