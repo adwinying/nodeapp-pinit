@@ -1,7 +1,9 @@
 const allPins = state => state.pins.list
 
-const activeUserPins = state => state.pins.list.filter(pin =>
-  state.auth.user && pin.owner._id === state.auth.user._id)
+const targetUserPins = state => state.pins.list.filter(pin =>
+  pin.owner._id === state.pins.targetUser)
+
+const overlayActive = state => state.overlay.active
 
 const isLoggedIn = state => state.auth.isLoggedIn
 
@@ -11,7 +13,8 @@ const flashMessage = state => state.flash
 
 export default {
   allPins,
-  activeUserPins,
+  targetUserPins,
+  overlayActive,
   isLoggedIn,
   profile,
   flashMessage,

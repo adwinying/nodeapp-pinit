@@ -22,10 +22,10 @@
           <a href="/api/auth/login"><i class="fa fa-twitter"></i> Login</a>
         </li>
         <li v-if="isLoggedIn">
-          <router-link to="/new">New Pin</router-link>
+          <a href="#" v-on:click.prevent="toggleOverlay">New Pin</a>
         </li>
         <li v-if="isLoggedIn">
-          <router-link to="/mypins">My Pins</router-link>
+          <router-link :to="`/user/${profile._id}`">My Pins</router-link>
         </li>
         <li v-if="isLoggedIn" class="dropdown" v-bind:class="{ open: isDropdownActive }">
           <a href="#"
@@ -62,6 +62,9 @@ export default {
   methods: {
     toggleDropdown() {
       this.isDropdownActive = !this.isDropdownActive
+    },
+    toggleOverlay() {
+      this.$store.commit('toggleOverlay')
     },
   },
 }

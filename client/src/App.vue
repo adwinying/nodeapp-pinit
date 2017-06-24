@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <navbar></navbar>
+    <new-pin></new-pin>
     <flash-message></flash-message>
     <transition name="fade" mode="out-in">
       <router-view></router-view>
@@ -10,6 +11,7 @@
 
 <script>
 import Navbar from './components/Navbar'
+import NewPin from './components/NewPin'
 import FlashMessage from './components/FlashMessage'
 
 export default {
@@ -20,6 +22,7 @@ export default {
   },
   components: {
     Navbar,
+    NewPin,
     FlashMessage,
   },
 }

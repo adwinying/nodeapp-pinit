@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <pin-list v-bind:pins="activeUserPins"></pin-list>
+    <pin-list v-bind:pins="targetUserPins"></pin-list>
   </div>
 </template>
 
@@ -9,12 +9,15 @@ import { mapGetters } from 'vuex'
 import PinList from './PinList'
 
 export default {
-  name: 'MyPins',
-  computed: mapGetters(['activeUserPins']),
+  name: 'UserPins',
+  computed: mapGetters(['targetUserPins']),
   data() {
     return {
 
     }
+  },
+  mounted() {
+    this.$store.commit('updateTargetUser', this.$route.params.userId)
   },
   components: {
     PinList,

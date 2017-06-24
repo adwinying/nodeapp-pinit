@@ -12,10 +12,7 @@ const pinModel = new Schema({
     required: true,
     ref: 'User',
   },
-  imageURL: {
-    type: String,
-    required: true,
-  },
+  imageURL: String,
   likedBy: {
     type: [{
       type: Schema.Types.ObjectId,

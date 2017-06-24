@@ -56,10 +56,65 @@ const fetchPins = ({ commit }) => {
     })
 }
 
+const addPin = ({ commit }, newPin) => {
+  flashLoading({ commit })
+
+  Vue.http.post('/api/pin/new', newPin)
+    .then(({ data }) => {
+      if (data.success) {
+        commit('addPin', data.pin)
+        commit('toggleOverlay')
+        flashMsg({ commit }, {
+          message: 'Pin successfully added.',
+          type: 'success',
+          duration: 3000,
+        })
+      } else {
+        flashMsg({ commit }, {
+          message: data.message,
+          type: 'danger',
+          duration: 0,
+        })
+      }
+    })
+    .catch((err) => {
+      flashErr({ commit })
+      console.error(err)
+    })
+}
+
+const deletePin = ({ commit }, pinId) => {
+  flashLoading({ commit })
+
+  Vue.http.delete(`/api/pin/${pinId}`)
+    .then(({ data }) => {
+      if (data.success) {
+        commit('deletePin', pinId)
+        flashMsg({ commit }, {
+          message: 'Pin successfully deleted.',
+          type: 'success',
+          duration: 3000,
+        })
+      } else {
+        flashMsg({ commit }, {
+          message: data.message,
+          type: 'danger',
+          duration: 0,
+        })
+      }
+    })
+    .catch((err) => {
+      flashErr({ commit })
+      console.error(err)
+    })
+}
+
 export default {
   flashMsg,
   flashLoading,
   flashErr,
   updateUser,
   fetchPins,
+  addPin,
+  deletePin,
 }

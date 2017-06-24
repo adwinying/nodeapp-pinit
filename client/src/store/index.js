@@ -20,6 +20,10 @@ export default new Vuex.Store({
     },
     pins: {
       list: [],
+      targetUser: undefined,
+    },
+    overlay: {
+      active: false,
     },
   },
   actions,
