@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema
 
 const userModel = new Schema({
   userId: {
@@ -9,41 +9,44 @@ const userModel = new Schema({
   },
   displayName: String,
   username: String,
-});
+  profileImageURL: String,
+})
 
-const User = mongoose.model('User', userModel);
+const User = mongoose.model('User', userModel)
 
-User.model = userModel;
+User.model = userModel
 
 User.findOrCreate = (profile, callback) => {
+  console.log()
   User.findOne({ userId: profile.id }, (err, user) => {
-    if (err) { callback(err, null); }
+    if (err) { callback(err, null) }
 
     if (user) {
-      console.log('User found in DB');
-      callback(null, user);
+      console.log('User found in DB')
+      callback(null, user)
     } else {
-      console.log('User not found. Creating new db entry');
+      console.log('User not found. Creating new db entry')
 
       const newUser = new User({
         userId: profile.id,
         displayName: profile.displayName,
         username: profile.username,
-      });
+        profileImageURL: profile.photos[0].value,
+      })
 
-      newUser.save(callback);
+      newUser.save(callback)
     }
-  });
-};
+  })
+}
 
 User.findByUserId = (userId, callback) => {
   User.findOne({ userId }, (err, user) => {
-    if (err) { callback(err, null); }
+    if (err) { callback(err, null) }
 
     if (user) {
-      callback(null, user);
+      callback(null, user)
     }
-  });
-};
+  })
+}
 
-module.exports = User;
+module.exports = User
