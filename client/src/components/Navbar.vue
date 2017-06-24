@@ -1,6 +1,6 @@
 <template>
 <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed">
         <span class="sr-only">Toggle navigation</span>
@@ -15,14 +15,14 @@
 
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="#">About</a></li>
+        <li><router-link to="/about">About</router-link></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li v-if="!isLoggedIn">
           <a href="/api/auth/login"><i class="fa fa-twitter"></i> Login</a>
         </li>
         <li v-if="isLoggedIn">
-          <a href="#">New Pin</a>
+          <router-link to="/new">New Pin</router-link>
         </li>
         <li v-if="isLoggedIn">
           <router-link to="/mypins">My Pins</router-link>

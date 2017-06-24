@@ -1,3 +1,13 @@
+const showMsg = (state, { message, type }) => {
+  state.flash.show = true
+  state.flash.message = message
+  state.flash.type = type
+}
+
+const hideMsg = (state) => {
+  state.flash.show = false
+}
+
 const updateUser = (state, user) => {
   state.auth.user = user
   state.auth.isLoggedIn = true
@@ -13,6 +23,8 @@ const updatePins = (state, pins) => {
 }
 
 export default {
+  showMsg,
+  hideMsg,
   updateUser,
   resetUser,
   updatePins,
