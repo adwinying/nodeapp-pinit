@@ -1,0 +1,26 @@
+{
+  "name": "pinit",
+  "version": "1.0.0",
+  "description": "NodeJS Pintrest Clone",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nf start"
+  },
+  "author": "Adwin Ying",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongoose": "^4.10.8",
+    "passport": "^0.3.2",
+    "passport-twitter": "^1.0.4"
+  },
+  "devDependencies": {
+    "eslint": "^4.1.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.6.0",
+    "foreman": "^2.0.0",
+    "nodemon": "^1.11.0"
+  }
+}
