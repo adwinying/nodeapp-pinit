@@ -79,7 +79,6 @@ pinRouter.put('/update', (req, res) => {
     owner: req.body.owner,
     imageURL: req.body.imageURL,
     likedBy: req.body.likedBy,
-    likeCount: req.body.likeCount,
   }
 
   Pin.update(targetPin, (err, pin) => {

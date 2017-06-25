@@ -20,10 +20,6 @@ const pinModel = new Schema({
     }],
     default: [],
   },
-  likeCount: {
-    type: Number,
-    default: 0,
-  },
 }, {
   timestamps: {
     createdAt: 'created',

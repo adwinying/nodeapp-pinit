@@ -35,6 +35,16 @@ const deletePin = (state, pinId) => {
     pin._id !== pinId)
 }
 
+const updatePin = (state, updatedPin) => {
+  state.pins.list = state.pins.list.map((pin) => {
+    if (pin._id === updatedPin._id) {
+      return updatedPin
+    }
+
+    return pin
+  })
+}
+
 const updateTargetUser = (state, userId) => {
   state.pins.targetUser = userId
 }
@@ -48,5 +58,6 @@ export default {
   updatePins,
   addPin,
   deletePin,
+  updatePin,
   updateTargetUser,
 }

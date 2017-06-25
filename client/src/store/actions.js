@@ -134,6 +134,74 @@ const deletePin = ({ commit }, pinId) => {
     })
 }
 
+const likePin = ({ commit }, { pin, userId }) => {
+  flashLoading({ commit })
+
+  Vue.http.put('/api/pin/update', {
+    ...pin,
+    likedBy: [...pin.likedBy, userId],
+  })
+    .then(({ data }) => {
+      if (data.success) {
+        commit('updatePin', data.pin)
+        flashMsg({ commit }, {
+          message: 'Pin successfully liked.',
+          type: 'success',
+          duration: 5000,
+        })
+      } else {
+        flashMsg({ commit }, {
+          message: data.message,
+          type: 'danger',
+          duration: 0,
+        })
+      }
+    })
+    .catch((err) => {
+      flashErr({ commit })
+      console.error(err)
+    })
+}
+
+const unlikePin = ({ commit }, { pin, userId }) => {
+  flashLoading({ commit })
+
+  const index = pin.likedBy.indexOf(userId)
+
+  if (index !== -1) {
+    Vue.http.put('/api/pin/update', {
+      ...pin,
+      likedBy: pin.likedBy.splice(index, 1),
+    })
+      .then(({ data }) => {
+        if (data.success) {
+          commit('updatePin', data.pin)
+          flashMsg({ commit }, {
+            message: 'Pin successfully unliked.',
+            type: 'success',
+            duration: 5000,
+          })
+        } else {
+          flashMsg({ commit }, {
+            message: data.message,
+            type: 'danger',
+            duration: 0,
+          })
+        }
+      })
+      .catch((err) => {
+        flashErr({ commit })
+        console.error(err)
+      })
+  } else {
+    flashMsg({ commit }, {
+      message: 'Index not found!',
+      type: 'danger',
+      duration: 0,
+    })
+  }
+}
+
 export default {
   flashMsg,
   flashLoading,
@@ -143,4 +211,6 @@ export default {
   fetchPins,
   addPin,
   deletePin,
+  likePin,
+  unlikePin,
 }

@@ -37,8 +37,11 @@
               >
                 <i class="fa fa-trash"></i>
               </button>
-              <button class="btn btn-primary btn-sm">
-                <i class="fa fa-star"></i> {{pin.likeCount}}
+              <button class="btn btn-sm btn-primary"
+                v-bind:class="profile && pin.likedBy.indexOf(profile._id) !== -1 ? 'disabled' : ''"
+                @click.prevent="handleLike(pin)"
+              >
+                <i class="fa fa-star"></i> {{pin.likedBy.length}}
               </button>
             </div><!-- /.panel-ctrl -->
           </div><!-- /.panel-footer -->
@@ -67,6 +70,28 @@ export default {
     handleDelete(pin) {
       this.$store.dispatch('deletePin', pin._id)
     },
+    handleLike(pin) {
+      if (!this.isLoggedIn) {
+        if (process.env.NODE_ENV === 'production') {
+          window.location.href = '/api/auth/login'
+        } else {
+          window.location.href = 'http://localhost:8000/api/auth/login'
+        }
+      } else {
+        /* eslint-disable no-lonely-if */
+        if (pin.likedBy.indexOf(this.profile._id) === -1) {
+          this.$store.dispatch('likePin', {
+            pin,
+            userId: this.profile._id,
+          })
+        } else {
+          this.$store.dispatch('unlikePin', {
+            pin,
+            userId: this.profile._id,
+          })
+        }
+      }
+    },
   },
 }
 </script>
@@ -84,4 +109,8 @@ export default {
 
 .panel-ctrl
   float: right
+
+.disabled
+  cursor: pointer
+  cursor: hand
 </style>
