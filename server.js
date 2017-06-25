@@ -24,8 +24,11 @@ passport.config(app)
 app.use('/api/auth', authRoutes)
 app.use('/api/pin', pinRoutes)
 
-app.get('/', (req, res) => {
-  res.redirect('http://localhost:8000')
+// Serve static files
+app.use(express.static(path.join(__dirname, '/public')))
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/index.html'))
 })
 
 app.listen(port, () => {

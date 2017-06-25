@@ -169,10 +169,9 @@ const unlikePin = ({ commit }, { pin, userId }) => {
   const index = pin.likedBy.indexOf(userId)
 
   if (index !== -1) {
-    Vue.http.put('/api/pin/update', {
-      ...pin,
-      likedBy: pin.likedBy.splice(index, 1),
-    })
+    pin.likedBy.splice(index, 1)
+
+    Vue.http.put('/api/pin/update', pin)
       .then(({ data }) => {
         if (data.success) {
           commit('updatePin', data.pin)
