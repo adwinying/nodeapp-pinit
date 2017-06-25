@@ -23,11 +23,13 @@
             <h5 class="text-center">{{pin.title}}</h5>
           </div>
           <div class="panel-footer">
-            <img
-              class="profile-img"
-              :src="pin.owner.profileImageURL"
-              :alt="pin.owner.username"
-            >
+            <router-link :to="`/user/${pin.owner._id}`">
+              <img
+                class="profile-img"
+                :src="pin.owner.profileImageURL"
+                :alt="pin.owner.username"
+              >
+            </router-link>
             <div class="panel-ctrl">
               <button class="btn btn-danger"
                 v-if="isLoggedIn && pin.owner._id === profile._id"
