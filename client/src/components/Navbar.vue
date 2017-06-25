@@ -39,7 +39,7 @@
             >{{profile.displayName}} <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Logout</a></li>
+            <li><a href="#" @click.prevent="handleLogout">Logout</a></li>
           </ul>
         </li>
       </ul>
@@ -65,6 +65,9 @@ export default {
     },
     toggleOverlay() {
       this.$store.commit('toggleOverlay')
+    },
+    handleLogout() {
+      this.$store.dispatch('logoutUser')
     },
   },
 }

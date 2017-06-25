@@ -6,6 +6,10 @@
 - MongoDB + Mongoose
 - Passport.js (Twitter strategy)
 - ESLint (Airbnb)
+- Vue.js
+- Vuex
+- Vue router/resource
+- Vue-masonry
 
 ## Backend APIs
 

@@ -31,13 +31,13 @@
               >
             </router-link>
             <div class="panel-ctrl">
-              <button class="btn btn-danger"
+              <button class="btn btn-danger btn-sm"
                 v-if="isLoggedIn && pin.owner._id === profile._id"
                 @click.prevent="handleDelete(pin)"
               >
                 <i class="fa fa-trash"></i>
               </button>
-              <button class="btn btn-primary">
+              <button class="btn btn-primary btn-sm">
                 <i class="fa fa-star"></i> {{pin.likeCount}}
               </button>
             </div><!-- /.panel-ctrl -->

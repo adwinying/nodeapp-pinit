@@ -26,6 +26,27 @@ const flashErr = ({ commit }) => {
   })
 }
 
+const logoutUser = ({ commit }) => {
+  Vue.http.get('/api/auth/logout')
+    .then(({ data }) => {
+      if (data.success) {
+        commit('resetUser')
+        flashMsg({ commit }, {
+          message: 'Successfully logged out.',
+          type: 'success',
+          duration: 5000,
+        })
+      } else {
+        flashErr({ commit })
+        console.error(data.message)
+      }
+    })
+    .catch((err) => {
+      flashErr({ commit })
+      console.error(err)
+    })
+}
+
 const updateUser = ({ commit }) => {
   Vue.http.get('/api/auth/profile')
     .then(({ data }) => {
@@ -34,6 +55,10 @@ const updateUser = ({ commit }) => {
       } else {
         commit('resetUser')
       }
+    })
+    .catch((err) => {
+      flashErr({ commit })
+      console.error(err)
     })
 }
 
@@ -67,7 +92,7 @@ const addPin = ({ commit }, newPin) => {
         flashMsg({ commit }, {
           message: 'Pin successfully added.',
           type: 'success',
-          duration: 3000,
+          duration: 5000,
         })
       } else {
         flashMsg({ commit }, {
@@ -93,7 +118,7 @@ const deletePin = ({ commit }, pinId) => {
         flashMsg({ commit }, {
           message: 'Pin successfully deleted.',
           type: 'success',
-          duration: 3000,
+          duration: 5000,
         })
       } else {
         flashMsg({ commit }, {
@@ -113,6 +138,7 @@ export default {
   flashMsg,
   flashLoading,
   flashErr,
+  logoutUser,
   updateUser,
   fetchPins,
   addPin,
