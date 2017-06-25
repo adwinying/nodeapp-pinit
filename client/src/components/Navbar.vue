@@ -2,7 +2,8 @@
 <nav class="navbar navbar-inverse">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed">
+      <button type="button" class="navbar-toggle collapsed"
+        @click.prevent="toggleMobile">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -13,7 +14,8 @@
       </router-link>
     </div>
 
-    <div class="collapse navbar-collapse">
+    <div class="navbar-collapse"
+      v-bind:class="{ active: mobileToggle }">
       <ul class="nav navbar-nav">
         <li><router-link to="/about">About</router-link></li>
       </ul>
@@ -57,6 +59,7 @@ export default {
   data() {
     return {
       isDropdownActive: false,
+      mobileToggle: false,
     }
   },
   methods: {
@@ -65,6 +68,9 @@ export default {
     },
     toggleOverlay() {
       this.$store.commit('toggleOverlay')
+    },
+    toggleMobile() {
+      this.mobileToggle = !this.mobileToggle
     },
     handleLogout() {
       this.$store.dispatch('logoutUser')
@@ -82,4 +88,14 @@ li > a.router-link-exact-active
   width: 21px
   height: auto
   margin-right: 10px
+
+@media screen and (max-width: 767px)
+  .navbar-collapse
+    overflow-y: hidden
+    max-height: 0
+    transition: all .5s cubic-bezier(0, 1, 0.5, 1)
+
+  .navbar-collapse.active
+    display: block
+    max-height: 220px
 </style>
