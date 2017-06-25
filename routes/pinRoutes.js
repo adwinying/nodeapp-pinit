@@ -3,6 +3,8 @@ const express = require('express')
 const User = require('../models/userModel')
 const Pin = require('../models/pinModel')
 
+const loggedIn = require('../config/passport').loggedIn
+
 const pinRouter = express.Router()
 
 function sendErr(res, message) {
@@ -46,8 +48,7 @@ pinRouter.get('/user/:userId', (req, res) => {
   })
 })
 
-// TODO: restrict route
-pinRouter.post('/new', (req, res) => {
+pinRouter.post('/new', loggedIn, (req, res) => {
   const newPin = {
     title: req.body.title,
     owner: req.user ? req.user._id : '594e1e6e2ade2b051f7db3fa',
@@ -72,7 +73,7 @@ pinRouter.post('/new', (req, res) => {
   })
 })
 
-pinRouter.put('/update', (req, res) => {
+pinRouter.put('/update', loggedIn, (req, res) => {
   const targetPin = {
     _id: req.body._id,
     title: req.body.title,
@@ -99,8 +100,7 @@ pinRouter.put('/update', (req, res) => {
   })
 })
 
-// TODO: restrict route
-pinRouter.delete('/:pinId', (req, res) => {
+pinRouter.delete('/:pinId', loggedIn, (req, res) => {
   Pin.delete(req.params.pinId, (err) => {
     if (err) {
       sendErr(res, err)
