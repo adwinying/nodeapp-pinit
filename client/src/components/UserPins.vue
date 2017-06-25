@@ -11,16 +11,19 @@ import PinList from './PinList'
 export default {
   name: 'UserPins',
   computed: mapGetters(['targetUserPins']),
-  data() {
-    return {
-
-    }
+  watch: {
+    $route: 'updateUser',
   },
   mounted() {
-    this.$store.commit('updateTargetUser', this.$route.params.userId)
+    this.updateUser()
   },
   components: {
     PinList,
+  },
+  methods: {
+    updateUser() {
+      this.$store.commit('updateTargetUser', this.$route.params.userId)
+    },
   },
 }
 </script>
