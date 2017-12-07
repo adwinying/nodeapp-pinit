@@ -11,6 +11,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "node": "^9.2.0",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",
     "vue": "^2.3.3",
