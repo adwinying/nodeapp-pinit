@@ -1,3 +1,5 @@
+__NOTE:__ Rewritten from scratch [here](https://github.com/adwinying/pinit)
+
 # PinIt: NodeJS Pinterest Clone
 
 ### Frameworks / Technologies Used
